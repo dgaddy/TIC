@@ -34,6 +34,7 @@
             // 
             // InputBox
             // 
+            this.InputBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.InputBox.Location = new System.Drawing.Point(12, 12);
             this.InputBox.Name = "InputBox";
             this.InputBox.Size = new System.Drawing.Size(167, 20);
@@ -57,6 +58,7 @@
             this.Controls.Add(this.GoButton);
             this.Controls.Add(this.InputBox);
             this.Name = "TICForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TIC";
             this.ResumeLayout(false);
             this.PerformLayout();
