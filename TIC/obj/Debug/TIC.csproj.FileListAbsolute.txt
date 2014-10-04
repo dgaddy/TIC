@@ -1,1 +1,0 @@
-c:\users\david\documents\visual studio 2013\Projects\TIC\TIC\bin\Debug\TIC.exe.config
