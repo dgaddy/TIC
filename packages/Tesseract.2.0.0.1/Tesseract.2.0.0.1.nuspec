@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Tesseract</id>
+    <version>2.0.0.1</version>
+    <title>A .Net wrapper for tesseract-ocr</title>
+    <authors>Charles Weld</authors>
+    <owners>Charles Weld</owners>
+    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
+    <projectUrl>https://github.com/charlesw/tesseract</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Tesseract is probably the most accurate open source OCR engine available. Combined with the Leptonica Image Processing Library it can read a wide variety of image formats and convert them to text in over 60 languages. It was one of the top 3 engines in the 1995 UNLV Accuracy test. Between 1995 and 2006 it had little work done on it, but since then it has been improved extensively by Google. It is released under the Apache License 2.0.</description>
+    <releaseNotes>*Note:* Version 2 was initially going to introduce support for Tesseract 3.03 however as this hasn't been released yet and we have a few minor breaking changes due to Mono support which require a version increment (we use semantic versioning).
+
+#### Breaking changes from 1.0
+
+* Tesseract.Interop is now internal which means we can make as many interop changes as we like as long as the public version doesn't change
+* TesseractEngine.Handle, Pix.Handle, and PixColormap.Handle are now internal
+* Logging is done to the ``Tesseract`` source, not ``Default``.
+
+## New features
+
+* Support for multi-page tiffs - Issue 50
+* Support for linux\mono - Issue 23
+
+## Bug fixes
+
+* Fixed UTF8 handling for SetVariable (support for non-english languages) - Issue 120 &amp; Issue 68</releaseNotes>
+    <copyright>Copyright 2013 Charles Weld</copyright>
+    <tags>Tesseract Ocr</tags>
+  </metadata>
+</package>
