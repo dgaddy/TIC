@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Tesseract;
+
 namespace TIC
 {
     public partial class TICForm : Form
@@ -23,6 +25,12 @@ namespace TIC
         {
             Console.WriteLine("Clicking");
             InputBox.Clear();
+
+            TesseractEngine engine = new TesseractEngine("tessdata", "eng");
+            Page result = engine.Process(new Bitmap("text.png"), PageSegMode.AutoOnly);
+            Console.Write(result.GetText());
+            Console.WriteLine("done");
+
         }
     }
 }
