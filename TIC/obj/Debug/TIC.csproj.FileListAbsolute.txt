@@ -1,1 +1,9 @@
 c:\users\david\documents\visual studio 2013\Projects\TIC\TIC\bin\Debug\TIC.exe.config
+c:\users\david\documents\visual studio 2013\Projects\TIC\TIC\bin\Debug\TIC.exe
+c:\users\david\documents\visual studio 2013\Projects\TIC\TIC\bin\Debug\TIC.pdb
+c:\users\david\documents\visual studio 2013\Projects\TIC\TIC\obj\Debug\TIC.csprojResolveAssemblyReference.cache
+c:\users\david\documents\visual studio 2013\Projects\TIC\TIC\obj\Debug\TIC.TICForm.resources
+c:\users\david\documents\visual studio 2013\Projects\TIC\TIC\obj\Debug\TIC.Properties.Resources.resources
+c:\users\david\documents\visual studio 2013\Projects\TIC\TIC\obj\Debug\TIC.csproj.GenerateResource.Cache
+c:\users\david\documents\visual studio 2013\Projects\TIC\TIC\obj\Debug\TIC.exe
+c:\users\david\documents\visual studio 2013\Projects\TIC\TIC\obj\Debug\TIC.pdb

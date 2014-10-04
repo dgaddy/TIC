@@ -10,11 +10,19 @@ using System.Windows.Forms;
 
 namespace TIC
 {
-    public partial class Form1 : Form
+    public partial class TICForm : Form
     {
-        public Form1()
+        public TICForm()
         {
             InitializeComponent();
+
+            this.AcceptButton = GoButton;
+        }
+
+        private void GoButton_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine("Clicking");
+            InputBox.Clear();
         }
     }
 }
