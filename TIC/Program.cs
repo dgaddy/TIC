@@ -18,14 +18,12 @@ namespace TIC
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-<<<<<<< HEAD
             Application.Run(new TICForm());
-            Client.SendData();
-=======
->>>>>>> d44e9c97924531fb27655b1247c9755fcd921475
 
             NotifyIcon ni = new NotifyIcon();
             ni.Visible = true;
+
+            Client c = new Client();
 
             using (ProcessIcon pi = new ProcessIcon())
             {
@@ -33,7 +31,7 @@ namespace TIC
 
                 TICForm form = new TICForm();
                 Application.Run();
-                Client.ReceiveData();
+                c.SendData();
             }
         }
     }
