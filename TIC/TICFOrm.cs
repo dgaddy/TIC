@@ -17,6 +17,8 @@ namespace TIC
     {
         GlobalHotkey hotkey_;
         ScreenShotCreator screenShotCreator_ = new ScreenShotCreator();
+        JsonResponse jsRes = new JsonResponse();
+
         public TICForm()
         {
             InitializeComponent();
