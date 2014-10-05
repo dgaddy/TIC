@@ -13,11 +13,29 @@ namespace TIC
     class Client
     {
         Socket server;
+        private static Object clientLockObject_;
+        private static Client instance_;
 
-        public Client() { 
+        private Client() 
+        { 
             server = new Socket(AddressFamily.InterNetwork,
                             SocketType.Stream, ProtocolType.Tcp);
             startListening();
+        }
+
+        public static Client Instance
+        {
+            get
+            {
+                lock (clientLockObject_)
+                {
+                    if (instance_ == null)
+                    {
+                        instance_ = new Client();
+                    }
+                }
+                return instance_;
+            }
         }
 
 
@@ -86,12 +104,25 @@ namespace TIC
             return data;
         }
 
+        public void SendBitmap(Bitmap bmp)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                // Save to memory using the Jpeg format
+                bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+
+                // read to end
+                byte[] bmpBytes = ms.GetBuffer();
+
+                SendData(bmpBytes);
+            }
+        }
+
         /// <summary>
         /// //////////////////////////
         /// </summary>
-        public void SendData()
+        public void SendData(byte[] data)
         {
-            byte[] data = new byte[1024];
             int sent;
             IPEndPoint ipep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9050);
 
@@ -103,27 +134,13 @@ namespace TIC
             {
                 Console.WriteLine("Unable to connect to server.");
                 Console.WriteLine(e.ToString());
-                //Console.ReadLine();
             }
 
-
-            Bitmap bmp = new Bitmap("Libraries\\Pictures\\ScreenShot.png");
-
-            MemoryStream ms = new MemoryStream();
-            // Save to memory using the Jpeg format
-            bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
-
-            // read to end
-            byte[] bmpBytes = ms.GetBuffer();
-            bmp.Dispose();
-            ms.Close();
-
-            sent = SendVarData(server, bmpBytes);
+            sent = SendVarData(server, data);
 
             Console.WriteLine("Disconnecting from server...");
             server.Shutdown(SocketShutdown.Both);
             server.Close();
-            //Console.ReadLine();
         }
 
         private int SendVarData(Socket s, byte[] data)
@@ -145,9 +162,5 @@ namespace TIC
             }
             return total;
         }
-
-
-
-
     }
 }

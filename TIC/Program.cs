@@ -23,7 +23,7 @@ namespace TIC
             NotifyIcon ni = new NotifyIcon();
             ni.Visible = true;
 
-            Client c = new Client();
+            Client c = Client.Instance;
 
             using (ProcessIcon pi = new ProcessIcon())
             {
@@ -31,9 +31,6 @@ namespace TIC
 
                 TICForm form = new TICForm();
                 Application.Run();
-
-                c.SendData();
-
             }
         }
     }
