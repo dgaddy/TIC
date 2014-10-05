@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
+using System.Diagnostics;
 
 namespace TIC
 {
@@ -16,9 +18,18 @@ namespace TIC
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+<<<<<<< HEAD
             Application.Run(new TICForm());
             Client.SendData();
+=======
+>>>>>>> d44e9c97924531fb27655b1247c9755fcd921475
 
+            NotifyIcon ni = new NotifyIcon();
+            ni.Visible = true;
+
+            TICForm form = new TICForm();
+            Application.Run();
+            Client.ReceiveData();
         }
     }
 }
