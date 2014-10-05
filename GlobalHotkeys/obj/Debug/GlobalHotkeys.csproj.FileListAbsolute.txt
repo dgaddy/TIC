@@ -1,0 +1,10 @@
+C:\Users\David\Documents\Visual Studio 2010\Projects\UIAutomation\GlobalHotkeys\bin\Debug\GlobalHotkeys.dll
+C:\Users\David\Documents\Visual Studio 2010\Projects\UIAutomation\GlobalHotkeys\bin\Debug\GlobalHotkeys.pdb
+C:\Users\David\Documents\Visual Studio 2010\Projects\UIAutomation\GlobalHotkeys\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\David\Documents\Visual Studio 2010\Projects\UIAutomation\GlobalHotkeys\obj\Debug\GlobalHotkeys.dll
+C:\Users\David\Documents\Visual Studio 2010\Projects\UIAutomation\GlobalHotkeys\obj\Debug\GlobalHotkeys.pdb
+C:\Users\Ben\Documents\Programming\TIC\GlobalHotkeys\bin\Debug\GlobalHotkeys.dll
+C:\Users\Ben\Documents\Programming\TIC\GlobalHotkeys\bin\Debug\GlobalHotkeys.pdb
+C:\Users\Ben\Documents\Programming\TIC\GlobalHotkeys\obj\Debug\GlobalHotkeys.csprojResolveAssemblyReference.cache
+C:\Users\Ben\Documents\Programming\TIC\GlobalHotkeys\obj\Debug\GlobalHotkeys.dll
+C:\Users\Ben\Documents\Programming\TIC\GlobalHotkeys\obj\Debug\GlobalHotkeys.pdb
