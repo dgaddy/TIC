@@ -43,10 +43,11 @@ namespace TIC
             string searchText = this.InputBox.Text;
             this.InputBox.Clear();
             this.Hide();
-           
-            
+
+
             String json = ocr.GetJson();
-            if (json == null) {
+            if (json == null)
+            {
                 Console.WriteLine("error");
                 return;
             }

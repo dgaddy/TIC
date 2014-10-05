@@ -17,11 +17,11 @@ namespace TIC
         public TICOverlay()
         {
             //InitializeComponent();
+            this.ShowInTaskbar = false;
 
             this.TopMost = true;
             this.Visible = true;
 
-            this.ShowInTaskbar = false;
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
 
