@@ -13,7 +13,7 @@ namespace TIC
     class Client
     {
         Socket server;
-        private static Object clientLockObject_;
+        private static Object clientLockObject_ = new Object();
         private static Client instance_;
 
         private Client() 
