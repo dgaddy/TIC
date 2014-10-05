@@ -11,9 +11,18 @@ namespace TIC
     class OcrSocketWrapper
     {
         private ClientSocket socket_;
-        public OcrSocketWrapper()
+        private static OcrSocketWrapper instance_ = new OcrSocketWrapper();
+        private OcrSocketWrapper()
         {
             socket_ = new ClientSocket();
+        }
+
+        public static OcrSocketWrapper Instance
+        {
+            get
+            {
+                return instance_;
+            }
         }
 
         public void SendBitmap(Bitmap bmp)
