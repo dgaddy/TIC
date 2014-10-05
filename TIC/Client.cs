@@ -13,8 +13,7 @@ namespace TIC
     class Client
     {
         Socket server;
-        private static Object clientLockObject_ = new Object();
-        private static Client instance_;
+        private static Client instance_ = new Client();
 
         private Client() 
         { 
@@ -27,13 +26,6 @@ namespace TIC
         {
             get
             {
-                lock (clientLockObject_)
-                {
-                    if (instance_ == null)
-                    {
-                        instance_ = new Client();
-                    }
-                }
                 return instance_;
             }
         }
