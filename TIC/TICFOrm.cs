@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using GlobalHotkeys;
-
-using Tesseract;
+using System.Drawing.Imaging;
 
 namespace TIC
 {
@@ -38,6 +37,10 @@ namespace TIC
 
         private void GoButton_Click(object sender, EventArgs e)
         {
+            string searchText = this.InputBox.Text;
+            this.InputBox.Clear();
+            this.Hide();
+
             Bitmap screenShot = screenShotCreator_.CreateDesktopScreenShot();
 
             int mousePositionX = MousePosition.X;
@@ -47,7 +50,6 @@ namespace TIC
             Clicker.toClick(1500, 400,false);
             Clicker.toClick(returnXCoord, returnYCoord);
             Clicker.toMove(mousePositionX, mousePositionY);
-            this.Hide();
         }
 
         protected override void WndProc(ref Message m)
