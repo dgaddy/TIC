@@ -23,16 +23,17 @@ namespace TIC
             return response;
         }
 
-        public Point getLocFromWord(String text, JsonWord[][] response) {
+        public List<Point> getLocFromWord(String text, JsonWord[][] response) {
+            List<Point> points = new List<Point>();
             for (int i = 0; i < response.Length; i++) {
                 for (int j = 0; j < response[i].Length; j++) {
                     JsonWord word = response[i][j];
-                    if (word.text == text) {
-                        return new Point(word.x, word.y);
+                    if (word.text.ToLower() == text.ToLower()) {
+                        points.Add(new Point(word.x, word.y));
                     }
                 }
             }
-            return new Point(-1,-1);
+            return points;
         }
 
     }

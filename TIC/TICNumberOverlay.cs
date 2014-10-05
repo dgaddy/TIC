@@ -22,20 +22,23 @@ namespace TIC
         private const int WM_KEYDOWN = 0x0100;
         private LowLevelKeyboardProc _proc;
         private IntPtr _hookID = IntPtr.Zero;
+        private TICOverlay overlay;
 
         public TICNumberOverlay(List<Point> matchPoints, Action<Point?> pointSelectedCallback)
         {
             _proc = this.HookCallback;
             _hookID = SetHook(_proc);
-            new TICOverlay();
+            overlay = new TICOverlay();
             pointSelectedCallback_ = pointSelectedCallback;
             matchPoints_ = matchPoints;
 
+            Console.WriteLine(matchPoints_.Count);
+
             //InitializeComponent();
+            this.ShowInTaskbar = false;
+
             this.TopMost = true;
             this.Visible = true;
-
-            this.ShowInTaskbar = false;
 
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
@@ -52,8 +55,9 @@ namespace TIC
             if (!drawn_)
             {
                 Graphics gfx = e.Graphics;
-                for (int i = 0; i < matchPoints_.Count; ++i)
+                for (int i = 0; i < matchPoints_.Count && i < 10; ++i)
                 {
+                    Console.WriteLine(matchPoints_[i]);
                     const int WIDTH = 30;
                     Label label = new Label();
                     label.Text = i.ToString();
@@ -72,6 +76,7 @@ namespace TIC
 
         private void callCallback(Point? point)
         {
+            overlay.Close();
             this.Close();
             pointSelectedCallback_(point);
         }
@@ -100,10 +105,12 @@ namespace TIC
                     if (vkCode - 0x30 < matchPoints_.Count)
                     {
                         callCallback(matchPoints_[vkCode - 0x30]);
+                        return new IntPtr(1);
                     }
                 }
             }
-            return CallNextHookEx(_hookID, nCode, wParam, lParam);
+            //return CallNextHookEx(_hookID, nCode, wParam, lParam);
+            return IntPtr.Zero;
         }
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]

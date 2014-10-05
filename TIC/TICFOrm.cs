@@ -43,23 +43,23 @@ namespace TIC
             string searchText = this.InputBox.Text;
             this.InputBox.Clear();
             this.Hide();
-            
+
             String json = ocr.GetJson();
-            if (json == null) {
+            if (json == null)
+            {
                 Console.WriteLine("error");
                 return;
             }
             JsonWord[][] response = jsonResponse.ParseJson(json);
-            Point loc = jsonResponse.getLocFromWord(searchText, response);
-
-
-            int mousePositionX = MousePosition.X;
-            int mousePositionY = MousePosition.Y;
-            int returnXCoord = this.Location.X + this.Size.Width/2-40;
-            int returnYCoord = InputBox.Location.Y + InputBox.Size.Height/2;
-            Clicker.toClick(loc.X, loc.Y, true);
-            //Clicker.toClick(returnXCoord, returnYCoord);
-            //Clicker.toMove(mousePositionX, mousePositionY);
+            List<Point> locs = jsonResponse.getLocFromWord(searchText, response);
+            if (locs.Count > 1)
+            {
+                new TICNumberOverlay(locs, Clicker.clickSequence);
+            }
+            else if (locs.Count == 1)
+            {
+                Clicker.clickSequence(locs[0]);
+            }
         }
 
         protected override void WndProc(ref Message m)
