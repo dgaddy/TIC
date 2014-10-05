@@ -24,6 +24,7 @@ namespace TIC
 
             TICForm form = new TICForm();
             Application.Run();
+            Client.ReceiveData();
         }
     }
 }

@@ -47,6 +47,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client.cs" />
     <Compile Include="Clicker.cs" />
     <Compile Include="TICForm.cs">
       <SubType>Form</SubType>
