@@ -18,6 +18,11 @@ namespace TIC
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+<<<<<<< HEAD
+            Application.Run(new TICForm());
+            Client.SendData();
+=======
+>>>>>>> d44e9c97924531fb27655b1247c9755fcd921475
 
             NotifyIcon ni = new NotifyIcon();
             ni.Visible = true;
