@@ -51,6 +51,7 @@
     <Compile Include="Clicker.cs" />
     <Compile Include="ContextMenus.cs" />
     <Compile Include="ProcessIcon.cs" />
+    <Compile Include="ScreenShotCreator.cs" />
     <Compile Include="TICForm.cs">
       <SubType>Form</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

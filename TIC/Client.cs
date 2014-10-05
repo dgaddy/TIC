@@ -47,7 +47,7 @@ namespace TIC
                 try
                 {
                     Image bmp = Image.FromStream(ms);
-                    pictureBox1.Image = bmp;
+                    //pictureBox1.Image = bmp;
                 }
                 catch (ArgumentException e)
                 {
