@@ -29,18 +29,18 @@ namespace TIC
         {
             using (MemoryStream ms = new MemoryStream())
             {
-                // Send Width and Height
-                byte[] width = BitConverter.GetBytes(bmp.Width);
-                byte[] height = BitConverter.GetBytes(bmp.Height);
-                byte[] size = width.Concat(height).ToArray();
-                socket_.SendData(size);
+                //// Send Width and Height
+                //byte[] width = BitConverter.GetBytes(bmp.Width);
+                //byte[] height = BitConverter.GetBytes(bmp.Height);
+                //byte[] size = width.Concat(height).ToArray();
+                //socket_.SendData(size);
 
                 // Save to memory using the Jpeg format
                 bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
 
                 // read to end
                 byte[] bmpBytes = ms.GetBuffer();
-
+                socket_.SendData(BitConverter.GetBytes(bmpBytes.Length));
                 socket_.SendData(bmpBytes);
             }
         }
