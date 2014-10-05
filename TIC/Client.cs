@@ -39,29 +39,25 @@ namespace TIC
             IPEndPoint newclient = (IPEndPoint)client.RemoteEndPoint;
             Console.WriteLine("Connected with {0} at port {1}",
                             newclient.Address, newclient.Port);
-
-            while (true)
+            try
             {
-                data = ReceiveVarData(client);
-                MemoryStream ms = new MemoryStream(data);
-                try
+                while (data.Length > 0)
                 {
+                    data = ReceiveVarData(client);
+                    MemoryStream ms = new MemoryStream(data);
+
                     Image bmp = Image.FromStream(ms);
                     //pictureBox1.Image = bmp;
                 }
-                catch (ArgumentException e)
-                {
-                    Console.WriteLine("something broke");
-                }
-
-
-                if (data.Length == 0)
-                    newsock.Listen(10);
             }
-            //Console.WriteLine("Disconnected from {0}", newclient.Address);
-            client.Close();
-            newsock.Close();
-            /////////////////////////////////////////////
+            catch (ArgumentException e)
+            {
+                Console.WriteLine("something broke");
+            }
+            finally {
+                client.Close();
+                newsock.Close();
+            }
 
         }
 
