@@ -27,10 +27,6 @@ namespace TIC
             socket_ = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPHostEntry ipHostInfo = Dns.GetHostEntry(SERVER_ADDRESS);
             IPEndPoint ipEp = new IPEndPoint(ipHostInfo.AddressList[0], SERVER_PORT);
-
-            socket_ = new Socket(AddressFamily.InterNetwork,
-                                 SocketType.Stream, ProtocolType.Tcp);
-
             socket_.Connect(ipEp);
         }
 
