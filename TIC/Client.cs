@@ -14,7 +14,7 @@ namespace TIC
     class ClientSocket
     {
         Socket socket_;
-        private const string SERVER_ADDRESS = "ec2-54-69-211-220.us-west-2.compute.amazonaws.com ";
+        //private const string SERVER_ADDRESS = "192.168.2.4";//"ec2-54-69-211-220.us-west-2.compute.amazonaws.com ";
         private const int SERVER_PORT = 3011;
 
         public ClientSocket() 
@@ -25,8 +25,9 @@ namespace TIC
         private void startListening()
         {
             socket_ = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            IPHostEntry ipHostInfo = Dns.GetHostEntry(SERVER_ADDRESS);
-            IPEndPoint ipEp = new IPEndPoint(ipHostInfo.AddressList[0], SERVER_PORT);
+            //IPHostEntry ipHostInfo = Dns.GetHostEntry(SERVER_ADDRESS);
+            //IPEndPoint ipEp = new IPEndPoint(ipHostInfo.AddressList[0], SERVER_PORT);
+            IPEndPoint ipEp = new IPEndPoint(IPAddress.Parse("192.168.2.4"), SERVER_PORT);
             socket_.Connect(ipEp);
         }
 

@@ -8,3 +8,8 @@ C:\Users\Ben\Documents\Programming\TIC\GlobalHotkeys\bin\Debug\GlobalHotkeys.pdb
 C:\Users\Ben\Documents\Programming\TIC\GlobalHotkeys\obj\Debug\GlobalHotkeys.csprojResolveAssemblyReference.cache
 C:\Users\Ben\Documents\Programming\TIC\GlobalHotkeys\obj\Debug\GlobalHotkeys.dll
 C:\Users\Ben\Documents\Programming\TIC\GlobalHotkeys\obj\Debug\GlobalHotkeys.pdb
+C:\Users\JonathanLim\Documents\HackMIT\TIC\GlobalHotkeys\bin\Debug\GlobalHotkeys.dll
+C:\Users\JonathanLim\Documents\HackMIT\TIC\GlobalHotkeys\bin\Debug\GlobalHotkeys.pdb
+C:\Users\JonathanLim\Documents\HackMIT\TIC\GlobalHotkeys\obj\Debug\GlobalHotkeys.csprojResolveAssemblyReference.cache
+C:\Users\JonathanLim\Documents\HackMIT\TIC\GlobalHotkeys\obj\Debug\GlobalHotkeys.dll
+C:\Users\JonathanLim\Documents\HackMIT\TIC\GlobalHotkeys\obj\Debug\GlobalHotkeys.pdb

@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,6 +51,8 @@
     <Compile Include="Client.cs" />
     <Compile Include="Clicker.cs" />
     <Compile Include="ContextMenus.cs" />
+    <Compile Include="JsonResponse.cs" />
+    <Compile Include="JsonWord.cs" />
     <Compile Include="OcrSocketWrapper.cs" />
     <Compile Include="ProcessIcon.cs" />
     <Compile Include="ScreenShotCreator.cs" />

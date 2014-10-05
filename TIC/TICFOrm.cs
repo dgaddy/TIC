@@ -17,7 +17,8 @@ namespace TIC
     {
         GlobalHotkey hotkey_;
         ScreenShotCreator screenShotCreator_ = new ScreenShotCreator();
-        JsonResponse jsRes = new JsonResponse();
+        JsonResponse jsonResponse = new JsonResponse();
+        OcrSocketWrapper ocr = OcrSocketWrapper.Instance;
 
         public TICForm()
         {
@@ -42,14 +43,22 @@ namespace TIC
             string searchText = this.InputBox.Text;
             this.InputBox.Clear();
             this.Hide();
+           
+            
+            String json = ocr.GetJson();
+            if (json == null) {
+                Console.WriteLine("error");
+                return;
+            }
+            JsonWord[][] response = jsonResponse.ParseJson(json);
+            Point loc = jsonResponse.getLocFromWord(searchText, response);
 
-            Bitmap screenShot = screenShotCreator_.CreateDesktopScreenShot();
 
             int mousePositionX = MousePosition.X;
             int mousePositionY = MousePosition.Y;
             int returnXCoord = this.Location.X + this.Size.Width/2-40;
             int returnYCoord = InputBox.Location.Y + InputBox.Size.Height/2;
-            Clicker.toClick(1500, 400,false);
+            Clicker.toClick(loc.X, loc.Y, false);
             Clicker.toClick(returnXCoord, returnYCoord);
             Clicker.toMove(mousePositionX, mousePositionY);
         }
@@ -58,6 +67,9 @@ namespace TIC
         {
             if (m.Msg == GlobalHotkeys.Win32.WM_HOTKEY_MSG_ID)
             {
+                Bitmap screenShot = screenShotCreator_.CreateDesktopScreenShot();
+                ocr.SendBitmap(screenShot);
+
                 this.Visible = true;
                 this.Activate();
             }
