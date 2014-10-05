@@ -33,13 +33,16 @@ namespace TIC
 
         private void GoButton_Click(object sender, EventArgs e)
         {
-            InputBox.Clear();
+            //InputBox.Clear();
 
-            TesseractEngine engine = new TesseractEngine("tessdata", "eng");
-            Page result = engine.Process(new Bitmap("text.png"), PageSegMode.AutoOnly);
-            Console.Write(result.GetText());
-            Console.WriteLine("done");
-
+            //TesseractEngine engine = new TesseractEngine("tessdata", "eng");
+            int mousePositionX = MousePosition.X;
+            int mousePositionY = MousePosition.Y;
+            int returnXCoord = this.Location.X + this.Size.Width/2-40;
+            int returnYCoord = InputBox.Location.Y + InputBox.Size.Height/2;
+            Clicker.toClick(1500, 400,false);
+            Clicker.toClick(returnXCoord, returnYCoord);
+            Clicker.toMove(mousePositionX, mousePositionY);
         }
     }
 }
