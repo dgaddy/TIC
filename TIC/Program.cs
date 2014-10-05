@@ -18,12 +18,9 @@ namespace TIC
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new TICForm());
 
             NotifyIcon ni = new NotifyIcon();
             ni.Visible = true;
-
-            Client c = Client.Instance;
 
             using (ProcessIcon pi = new ProcessIcon())
             {

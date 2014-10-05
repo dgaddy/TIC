@@ -50,6 +50,7 @@
     <Compile Include="Client.cs" />
     <Compile Include="Clicker.cs" />
     <Compile Include="ContextMenus.cs" />
+    <Compile Include="OcrSocketWrapper.cs" />
     <Compile Include="ProcessIcon.cs" />
     <Compile Include="ScreenShotCreator.cs" />
     <Compile Include="TICForm.cs">

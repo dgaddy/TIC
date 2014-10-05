@@ -7,111 +7,37 @@ using System.Net;
 using System.Net.Sockets;
 using System.Drawing;
 using System.IO;
+using System.Threading;
 
 namespace TIC
 {
-    class Client
+    class ClientSocket
     {
-        Socket server;
-        private static Client instance_ = new Client();
+        Socket socket_;
+        private const string SERVER_ADDRESS = "ec2-54-69-211-220.us-west-2.compute.amazonaws.com ";
+        private const int SERVER_PORT = 3011;
 
-        private Client() 
+        public ClientSocket() 
         { 
-            server = new Socket(AddressFamily.InterNetwork,
-                            SocketType.Stream, ProtocolType.Tcp);
             startListening();
         }
 
-        public static Client Instance
-        {
-            get
-            {
-                return instance_;
-            }
-        }
-
-
         private void startListening()
         {
+            socket_ = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            IPHostEntry ipHostInfo = Dns.GetHostEntry(SERVER_ADDRESS);
+            IPEndPoint ipEp = new IPEndPoint(ipHostInfo.AddressList[0], SERVER_PORT);
 
-            Console.WriteLine("Server is starting...");
-            byte[] data = new byte[1024];
-            IPEndPoint ipep = new IPEndPoint(IPAddress.Any, 9050);
+            socket_ = new Socket(AddressFamily.InterNetwork,
+                                 SocketType.Stream, ProtocolType.Tcp);
 
-            Socket newsock = new Socket(AddressFamily.InterNetwork,
-                            SocketType.Stream, ProtocolType.Tcp);
-
-            newsock.Bind(ipep);
-            newsock.Listen(10);
-            Console.WriteLine("Waiting for a client...");
-
-            Socket client = newsock.Accept();
-            IPEndPoint newclient = (IPEndPoint)client.RemoteEndPoint;
-            Console.WriteLine("Connected with {0} at port {1}",
-                            newclient.Address, newclient.Port);
-
-            while (true)
-            {
-                data = ReceiveVarData(client);
-                MemoryStream ms = new MemoryStream(data);
-                try
-                {
-                    Image bmp = Image.FromStream(ms);
-                    //pictureBox1.Image = bmp;
-                }
-                catch (ArgumentException e)
-                {
-                    Console.WriteLine("something broke");
-                }
-
-
-                if (data.Length == 0)
-                    newsock.Listen(10);
-            }
-            //Console.WriteLine("Disconnected from {0}", newclient.Address);
-            client.Close();
-            newsock.Close();
-            /////////////////////////////////////////////
-
+            socket_.Connect(ipEp);
         }
 
-        private static byte[] ReceiveVarData(Socket s)
+        private void stopListenting()
         {
-            int total = 0;
-            int recv;
-            byte[] datasize = new byte[4];
-
-            recv = s.Receive(datasize, 0, 4, 0);
-            int size = BitConverter.ToInt32(datasize, 0);
-            int dataleft = size;
-            byte[] data = new byte[size];
-
-
-            while (total < size)
-            {
-                recv = s.Receive(data, total, dataleft, 0);
-                if (recv == 0)
-                {
-                    break;
-                }
-                total += recv;
-                dataleft -= recv;
-            }
-            return data;
-        }
-
-        public void SendBitmap(Bitmap bmp)
-        {
-            using (MemoryStream ms = new MemoryStream())
-            {
-                // Save to memory using the Jpeg format
-                bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
-
-                // read to end
-                byte[] bmpBytes = ms.GetBuffer();
-
-                SendData(bmpBytes);
-            }
+            socket_.Shutdown(SocketShutdown.Both);
+            socket_.Close();
         }
 
         /// <summary>
@@ -119,44 +45,27 @@ namespace TIC
         /// </summary>
         public void SendData(byte[] data)
         {
-            int sent;
-            IPEndPoint ipep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9050);
-
-            try
-            {
-                server.Connect(ipep);
-            }
-            catch (SocketException e)
-            {
-                Console.WriteLine("Unable to connect to server.");
-                Console.WriteLine(e.ToString());
-            }
-
-            sent = SendVarData(server, data);
-
-            Console.WriteLine("Disconnecting from server...");
-            server.Shutdown(SocketShutdown.Both);
-            server.Close();
+            socket_.Send(data);
         }
 
-        private int SendVarData(Socket s, byte[] data)
+        public void ReceiveData(byte[] data)
         {
-            int total = 0;
-            int size = data.Length;
-            int dataleft = size;
-            int sent;
-
-            byte[] datasize = new byte[4];
-            datasize = BitConverter.GetBytes(size);
-            sent = s.Send(datasize);
-
-            while (total < size)
+            int nBytes = socket_.Available;
+            if (nBytes > 0)
             {
-                sent = s.Send(data, total, dataleft, SocketFlags.None);
-                total += sent;
-                dataleft -= sent;
+                data = new byte[nBytes];
+                socket_.Receive(data);
             }
-            return total;
+            else
+            {
+                data = null;
+            }
+        }
+
+
+        ~ClientSocket()
+        {
+            stopListenting();
         }
     }
 }
