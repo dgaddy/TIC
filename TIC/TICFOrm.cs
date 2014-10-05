@@ -51,16 +51,9 @@ namespace TIC
                 return;
             }
             JsonWord[][] response = jsonResponse.ParseJson(json);
-            Point loc = jsonResponse.getLocFromWord(searchText, response);
+            List<Point> locs = jsonResponse.getLocFromWord(searchText, response);
 
-
-            int mousePositionX = MousePosition.X;
-            int mousePositionY = MousePosition.Y;
-            int returnXCoord = this.Location.X + this.Size.Width/2-40;
-            int returnYCoord = InputBox.Location.Y + InputBox.Size.Height/2;
-            Clicker.toClick(loc.X, loc.Y, false);
-            Clicker.toClick(returnXCoord, returnYCoord);
-            Clicker.toMove(mousePositionX, mousePositionY);
+            new TICNumberOverlay(locs, Clicker.clickSequence);
         }
 
         protected override void WndProc(ref Message m)

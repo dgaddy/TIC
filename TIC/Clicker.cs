@@ -24,6 +24,18 @@ namespace TIC
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         public static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
 
+        public static void clickSequence(Point? loc)
+        {
+            if (loc == null)
+                return;
+            Point clkPos = (Point) loc;
+            Point curPos = Cursor.Position;
+            //int returnXCoord = this.Location.X + this.Size.Width / 2 - 40;
+            //int returnYCoord = InputBox.Location.Y + InputBox.Size.Height / 2;
+            Clicker.toClick(clkPos.X, clkPos.Y, false);
+            //Clicker.toClick(returnXCoord, returnYCoord);
+            Clicker.toMove(curPos.X, curPos.Y);
+        }
 
         public static void toClick(int xCoordMouse, int yCoordMouse, Boolean singleClick = true)
         {

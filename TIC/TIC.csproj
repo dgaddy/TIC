@@ -51,10 +51,8 @@
     <Compile Include="Client.cs" />
     <Compile Include="Clicker.cs" />
     <Compile Include="ContextMenus.cs" />
-<<<<<<< HEAD
     <Compile Include="JsonResponse.cs" />
     <Compile Include="JsonWord.cs" />
-=======
     <Compile Include="TICNumberOverlay.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -67,7 +65,6 @@
     <Compile Include="TICOverlay.Designer.cs">
       <DependentUpon>TICOverlay.cs</DependentUpon>
     </Compile>
->>>>>>> a24970020e14e4e979eeffb2b97140a775e11b36
     <Compile Include="OcrSocketWrapper.cs" />
     <Compile Include="ProcessIcon.cs" />
     <Compile Include="ScreenShotCreator.cs" />
