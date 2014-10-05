@@ -12,14 +12,111 @@ namespace TIC
 {
     class Client
     {
-        public static void ReceiveData()
+        Socket server;
+        private static Client instance_ = new Client();
+
+        private Client() 
+        { 
+            server = new Socket(AddressFamily.InterNetwork,
+                            SocketType.Stream, ProtocolType.Tcp);
+            startListening();
+        }
+
+        public static Client Instance
         {
+            get
+            {
+                return instance_;
+            }
+        }
+
+
+        private void startListening()
+        {
+
+            Console.WriteLine("Server is starting...");
             byte[] data = new byte[1024];
+            IPEndPoint ipep = new IPEndPoint(IPAddress.Any, 9050);
+
+            Socket newsock = new Socket(AddressFamily.InterNetwork,
+                            SocketType.Stream, ProtocolType.Tcp);
+
+            newsock.Bind(ipep);
+            newsock.Listen(10);
+            Console.WriteLine("Waiting for a client...");
+
+            Socket client = newsock.Accept();
+            IPEndPoint newclient = (IPEndPoint)client.RemoteEndPoint;
+            Console.WriteLine("Connected with {0} at port {1}",
+                            newclient.Address, newclient.Port);
+            try
+            {
+                while (data.Length > 0)
+                {
+                    data = ReceiveVarData(client);
+                    MemoryStream ms = new MemoryStream(data);
+
+                    Image bmp = Image.FromStream(ms);
+                    //pictureBox1.Image = bmp;
+                }
+            }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine("something broke");
+            }
+            finally {
+                client.Close();
+                newsock.Close();
+            }
+
+        }
+
+        private static byte[] ReceiveVarData(Socket s)
+        {
+            int total = 0;
+            int recv;
+            byte[] datasize = new byte[4];
+
+            recv = s.Receive(datasize, 0, 4, 0);
+            int size = BitConverter.ToInt32(datasize, 0);
+            int dataleft = size;
+            byte[] data = new byte[size];
+
+
+            while (total < size)
+            {
+                recv = s.Receive(data, total, dataleft, 0);
+                if (recv == 0)
+                {
+                    break;
+                }
+                total += recv;
+                dataleft -= recv;
+            }
+            return data;
+        }
+
+        public void SendBitmap(Bitmap bmp)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                // Save to memory using the Jpeg format
+                bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+
+                // read to end
+                byte[] bmpBytes = ms.GetBuffer();
+
+                SendData(bmpBytes);
+            }
+        }
+
+        /// <summary>
+        /// //////////////////////////
+        /// </summary>
+        public void SendData(byte[] data)
+        {
             int sent;
             IPEndPoint ipep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9050);
-
-            Socket server = new Socket(AddressFamily.InterNetwork,
-                            SocketType.Stream, ProtocolType.Tcp);
 
             try
             {
@@ -29,30 +126,16 @@ namespace TIC
             {
                 Console.WriteLine("Unable to connect to server.");
                 Console.WriteLine(e.ToString());
-                //Console.ReadLine();
             }
 
-
-            Bitmap bmp = new Bitmap("Libraries\\Pictures\\ScreenShot.png");
-
-            MemoryStream ms = new MemoryStream();
-            // Save to memory using the Jpeg format
-            bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
-
-            // read to end
-            byte[] bmpBytes = ms.GetBuffer();
-            bmp.Dispose();
-            ms.Close();
-
-            sent = SendVarData(server, bmpBytes);
+            sent = SendVarData(server, data);
 
             Console.WriteLine("Disconnecting from server...");
             server.Shutdown(SocketShutdown.Both);
             server.Close();
-            //Console.ReadLine();
         }
 
-        private static int SendVarData(Socket s, byte[] data)
+        private int SendVarData(Socket s, byte[] data)
         {
             int total = 0;
             int size = data.Length;

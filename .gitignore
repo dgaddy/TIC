@@ -2,3 +2,4 @@ TIC/bin/
 TIC/obj/
 OCRServer/OCRServer/OCRServer.Windows/bin/
 OCRServer/OCRServer/OCRServer.Windows/obj/
+*.suo
