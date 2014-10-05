@@ -12,7 +12,7 @@ namespace TIC
 {
     class Client
     {
-        public static void ReceiveData()
+        public static void SendData()
         {
             byte[] data = new byte[1024];
             int sent;
