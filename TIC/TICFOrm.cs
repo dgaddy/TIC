@@ -17,6 +17,7 @@ namespace TIC
     public partial class TICForm : Form
     {
         GlobalHotkey hotkey_;
+        ScreenShotCreator screenShotCreator_ = new ScreenShotCreator();
         public TICForm()
         {
             InitializeComponent();
@@ -37,9 +38,8 @@ namespace TIC
 
         private void GoButton_Click(object sender, EventArgs e)
         {
-            //InputBox.Clear();
+            Bitmap screenShot = screenShotCreator_.CreateDesktopScreenShot();
 
-            //TesseractEngine engine = new TesseractEngine("tessdata", "eng");
             int mousePositionX = MousePosition.X;
             int mousePositionY = MousePosition.Y;
             int returnXCoord = this.Location.X + this.Size.Width/2-40;
