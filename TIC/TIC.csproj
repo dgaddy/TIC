@@ -49,6 +49,8 @@
   <ItemGroup>
     <Compile Include="Client.cs" />
     <Compile Include="Clicker.cs" />
+    <Compile Include="ContextMenus.cs" />
+    <Compile Include="ProcessIcon.cs" />
     <Compile Include="TICForm.cs">
       <SubType>Form</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -71,6 +73,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -87,6 +90,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\SystemTrayIcon.ico" />
+    <None Include="Resources\SystemTrayApp.bmp" />
+    <None Include="Resources\simple.png" />
+    <None Include="Resources\simple.ico" />
     <Content Include="x64\liblept168.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

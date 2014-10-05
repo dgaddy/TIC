@@ -22,9 +22,14 @@ namespace TIC
             NotifyIcon ni = new NotifyIcon();
             ni.Visible = true;
 
-            TICForm form = new TICForm();
-            Application.Run();
-            Client.ReceiveData();
+            using (ProcessIcon pi = new ProcessIcon())
+            {
+                pi.Display();
+
+                TICForm form = new TICForm();
+                Application.Run();
+                Client.ReceiveData();
+            }
         }
     }
 }
