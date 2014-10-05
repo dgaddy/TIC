@@ -43,7 +43,6 @@ namespace TIC
             string searchText = this.InputBox.Text;
             this.InputBox.Clear();
             this.Hide();
-           
             
             String json = ocr.GetJson();
             if (json == null) {
@@ -58,9 +57,9 @@ namespace TIC
             int mousePositionY = MousePosition.Y;
             int returnXCoord = this.Location.X + this.Size.Width/2-40;
             int returnYCoord = InputBox.Location.Y + InputBox.Size.Height/2;
-            Clicker.toClick(loc.X, loc.Y, false);
-            Clicker.toClick(returnXCoord, returnYCoord);
-            Clicker.toMove(mousePositionX, mousePositionY);
+            Clicker.toClick(loc.X, loc.Y, true);
+            //Clicker.toClick(returnXCoord, returnYCoord);
+            //Clicker.toMove(mousePositionX, mousePositionY);
         }
 
         protected override void WndProc(ref Message m)

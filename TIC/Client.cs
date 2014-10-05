@@ -45,8 +45,9 @@ namespace TIC
             socket_.Send(data);
         }
 
-        public void ReceiveData(byte[] data)
+        public byte[] ReceiveData()
         {
+            byte[] data;
             int nBytes = socket_.Available;
             if (nBytes > 0)
             {
@@ -57,6 +58,7 @@ namespace TIC
             {
                 data = null;
             }
+            return data;
         }
 
 

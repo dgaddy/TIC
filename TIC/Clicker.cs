@@ -29,8 +29,8 @@ namespace TIC
         {
             if (singleClick){
                 SetCursorPos(xCoordMouse, yCoordMouse);
-                mouse_event(MOUSEEVENTF_LEFTDOWN, xCoordMouse, yCoordMouse, 0, 0);
-                mouse_event(MOUSEEVENTF_LEFTUP, xCoordMouse, yCoordMouse, 0, 0);
+                mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+                mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
                 //return position
             }
             else {
